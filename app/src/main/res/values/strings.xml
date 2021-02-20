@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LK21</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_tv_shows">Tv Shows</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="text_date">Date</string>
+    <string name="text_category">Category</string>
+    <string name="text_description">Description</string>
+    <string name="image_movie">Image Movie</string>
+    <string name="image_logo">Logo</string>
+    <string name="error_content">error_image</string>
+    <string name="title_favorite_movie">Favorite</string>
+</resources>

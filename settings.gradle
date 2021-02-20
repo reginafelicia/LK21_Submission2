@@ -1,0 +1,4 @@
+include ':favorite_movie'
+include ':core'
+include ':app'
+rootProject.name = "LK21"

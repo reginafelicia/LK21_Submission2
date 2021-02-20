@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def databasePropertiesFile = rootProject.file("database.properties")
+def databaseProperties = new Properties()
+databaseProperties.load(new FileInputStream(databasePropertiesFile))
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        buildConfigField "String", 'API', '"6ffc29a38d5032bd5b0570e01c5132b0"'
+        buildConfigField "String", 'DATABASE_PASS_PHRASE', databaseProperties['DATABASE_PASS_PHRASE']
+        applicationId "com.reginafelicia.lk21"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "com.reginafelicia.lk21.base.MockRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    dynamicFeatures = [':favorite_movie']
+}
+
+dependencies {
+    implementation project(":core")
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.google.android.play:core:1.3.4'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.3"
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'org.parceler:parceler-api:1.1.13'
+
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
+
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common-ktx:2.1.2"
+
+    // optional - RxJava2 support
+    implementation "androidx.paging:paging-rxjava2-ktx:2.1.2"
+
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.6.0'
+
+    implementation "com.google.dagger:dagger:2.28.3"
+    kapt "com.google.dagger:dagger-compiler:2.28.3"
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-alpha1'
+    implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
+
+    implementation 'com.google.android.material:material:1.2.1'
+    testImplementation 'io.mockk:mockk:1.10.2'
+
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.2'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
+}
